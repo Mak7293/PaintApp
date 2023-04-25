@@ -14,7 +14,9 @@ import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentSampleDesignBinding;
 import com.soft918.paintapp.databinding.FragmentSplashScreenBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class SplashScreen extends Fragment {
 
 

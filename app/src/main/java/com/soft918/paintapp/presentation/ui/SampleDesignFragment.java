@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentSampleDesignBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class SampleDesignFragment extends Fragment {
 
     public SampleDesignFragment() {

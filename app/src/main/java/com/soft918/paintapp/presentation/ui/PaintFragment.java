@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentPaintBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class PaintFragment extends Fragment {
 
     public PaintFragment() {
