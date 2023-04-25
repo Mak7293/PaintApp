@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/paintFragment">
+
+    <fragment
+        android:id="@+id/paintFragment"
+        android:name="com.soft918.paintapp.presentation.ui.PaintFragment"
+        android:label="fragment_paint"
+        tools:layout="@layout/fragment_paint" />
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.soft918.paintapp.presentation.ui.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" />
+    <fragment
+        android:id="@+id/drawingsDrawnFragment"
+        android:name="com.soft918.paintapp.presentation.ui.DrawingsDrawnFragment"
+        android:label="fragment_drawings_drawn"
+        tools:layout="@layout/fragment_drawings_drawn" />
+    <fragment
+        android:id="@+id/sampleDesignFragment"
+        android:name="com.soft918.paintapp.presentation.ui.SampleDesignFragment"
+        android:label="fragment_sample_design"
+        tools:layout="@layout/fragment_sample_design" />
+</navigation>

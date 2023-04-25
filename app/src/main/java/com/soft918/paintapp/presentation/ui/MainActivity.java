@@ -1,4 +1,4 @@
-package com.soft918.paintapp.presentation;
+package com.soft918.paintapp.presentation.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
