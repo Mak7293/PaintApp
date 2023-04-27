@@ -3,6 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="pencil_tip">#DCCF5E</color>
+
 
     <!--pallet_one-->
     <color name="num0_pallet_one">#8ECAE6</color>
@@ -29,26 +31,26 @@
     <color name="red_set">#CE456D</color>
     <color name="red_orange_set">#D95555</color>
     <color name="orange_set">#E16B40</color>
+    <color name="yellow_orange_set">#D9753F</color>
     <color name="yellow_set">#FDF453</color>
+    <color name="golden_yellow_set">#F9E73D</color>
+    <color name="peach_set">#E7C9A6</color>
     <color name="yellow_green_set">#87BE55</color>
     <color name="green_set">#508D5D</color>
+    <color name="aqua_green_set">#76D1D2</color>
     <color name="sky_blue_set">#64B1F2</color>
+    <color name="light_blue_set">#4F76D8</color>
     <color name="blue_set">#3D57D5</color>
     <color name="violet_set">#605CA6</color>
     <color name="brown_set">#6F5756</color>
-    <color name="black_set">#49484C</color>
-    <color name="white_set">#FFFFFF</color>
     <color name="light_brown_set">#9B6D5F</color>
     <color name="mahogany_set">#9E5568</color>
     <color name="magenta_set">#AB5181</color>
     <color name="pink_set">#DB99C6</color>
-    <color name="yellow_orange_set">#D9753F</color>
-    <color name="peach_set">#E7C9A6</color>
-    <color name="golden_yellow_set">#F9E73D</color>
-    <color name="aqua_green_set">#76D1D2</color>
     <color name="jade_green_set">#86946A</color>
-    <color name="light_blue_set">#4F76D8</color>
     <color name="gray_set">#7C7A79</color>
     <color name="tan_set">#B78B6F</color>
+    <color name="black_set">#49484C</color>
+    <color name="white_set">#FFFFFF</color>
 
 </resources>

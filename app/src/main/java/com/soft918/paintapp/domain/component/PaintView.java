@@ -7,16 +7,23 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 
 public class PaintView extends View {
+    Context context;
 
     public PaintView(Context context, AttributeSet attrs){
         super(context,attrs);
+        this.context = context;
         setUpDrawing();
+
     }
 
     private CustomPath mDrawPath;
@@ -109,9 +116,9 @@ public class PaintView extends View {
         mDrawPaint.setStrokeWidth(mBrushSize);   //  BoilerPlate code?
     }
 
-    public void setColor(String newColor){
-        color = Color.parseColor(newColor);
-        mDrawPaint.setColor(color);          //  BoilerPlate code?
+    public void setColor(int newColor){
+        color = newColor;
+        mDrawPaint.setColor(newColor);  //  BoilerPlate code?
     }
 
     static class CustomPath extends Path {
