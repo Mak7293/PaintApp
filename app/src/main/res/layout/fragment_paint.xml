@@ -17,6 +17,7 @@
         android:id="@+id/fl_paint"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/rv_pencil"
         app:layout_constraintBottom_toTopOf="@id/fl_tools"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,14 +28,108 @@
             android:layout_height="match_parent"/>
 
     </FrameLayout>
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/fl_tools"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@android:color/holo_red_dark"
-        >
+        android:layoutDirection="rtl"
+        android:gravity="center_vertical"
+        android:background="#FFA0A0">
+        <TextView
+            android:id="@+id/pencil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:fontFamily="@font/vazirmatn_regular"
+            android:textSize="18sp"
+            android:textColor="@color/black_text_color"
+            android:text="اندازه مداد:"/>
+        <ImageView
+            android:id="@+id/pencil_size"
+            android:src="@drawable/extra_large_pencil"
+            android:scaleType="center"
+            android:layout_marginRight="5dp"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btn_positive_pencil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_remove_btn_background"
+                android:src="@drawable/ic_add"/>
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btn_negative_pencil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/add_remove_btn_background"
+                android:src="@drawable/ic_remove"/>
+        </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            app:dividerColor="@color/black"
+            android:layout_marginVertical="5dp"/>
+        <TextView
+            android:id="@+id/eraser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:fontFamily="@font/vazirmatn_regular"
+            android:textSize="18sp"
+            android:textColor="@color/black_text_color"
+            android:text="اندازه پاک کن:"/>
+        <ImageView
+            android:id="@+id/eraser_size"
+            android:src="@drawable/extra_large_eraser"
+            android:scaleType="center"
+            android:layout_marginRight="5dp"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btn_positive_eraser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_remove_btn_background"
+                android:src="@drawable/ic_add"/>
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/btn_negative_eraser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/add_remove_btn_background"
+                android:src="@drawable/ic_remove"/>
+        </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            app:dividerColor="@color/black"
+            android:layout_marginVertical="5dp"/>
+        <ImageButton
+            android:id="@+id/btn_undo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/add_remove_btn_background"
+            android:src="@drawable/ic_undo"/>
 
-    </FrameLayout>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

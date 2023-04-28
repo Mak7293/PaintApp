@@ -47,6 +47,12 @@ public class PaintView extends View {
         mBrushSize = 20f;  //no need anymore because setSizeToBrush fun
     }
 
+    public void onClickUndo(){
+        if(mPath.size() > 0){
+            mUndoPath.add(mPath.remove(mPath.size()-1));
+            invalidate();
+        }
+    }
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);

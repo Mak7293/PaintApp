@@ -5,6 +5,9 @@
 
     <color name="pencil_tip">#DCCF5E</color>
 
+    <color name="black_text_color">#202020</color>
+    <color name="white_text_color">#E0E0E0</color>
+
 
     <!--pallet_one-->
     <color name="num0_pallet_one">#8ECAE6</color>

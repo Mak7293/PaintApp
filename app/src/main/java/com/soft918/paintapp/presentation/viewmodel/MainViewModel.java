@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel;
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.domain.event.Event;
 import com.soft918.paintapp.domain.model.ColorSet;
+import com.soft918.paintapp.domain.util.PencilEraserSize;
+import com.soft918.paintapp.domain.util.PencilEraser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,9 @@ public class MainViewModel extends ViewModel {
     Application application;
     public MutableLiveData<List<ColorSet>> colorList = new MutableLiveData<List<ColorSet>>();
     public MutableLiveData<Integer> selectedColor = new MutableLiveData<Integer>();
+    public MutableLiveData<String> selectPencilEraser = new MutableLiveData<String>(PencilEraser.pencil.state);
+    public MutableLiveData<String> pencilSize = new MutableLiveData<String>(PencilEraserSize.largeSize.size);
+    public MutableLiveData<String> eraserSize = new MutableLiveData<String>(PencilEraserSize.largeSize.size);
     @Inject
     public MainViewModel(Application application){
         this.application = application;
@@ -33,7 +38,26 @@ public class MainViewModel extends ViewModel {
     public void onEvent(Event event){
         if (event instanceof Event.UpdateColorList){
             updateColorList(((Event.UpdateColorList) event).listId);
+        } else if (event instanceof Event.SelectPencilOrEraser) {
+            updateSelectedPencilEraser(((Event.SelectPencilOrEraser) event).state);
+        } else if (event instanceof Event.changeSize) {
+            updatePencilEraserSize(
+                    ((Event.changeSize) event).size,
+                    ((Event.changeSize) event).state
+            );
         }
+    }
+    private void updatePencilEraserSize(String size, String state){
+        if (size != null){
+            if (state == PencilEraser.pencil.state){
+                pencilSize.postValue(size);
+            }else if(state == PencilEraser.eraser.state){
+                eraserSize.postValue(size);
+            }
+        }
+    }
+    private void updateSelectedPencilEraser(String string){
+        selectPencilEraser.postValue(string);
     }
     private  void updateColorList(int id){
         List<ColorSet> list = colorList.getValue();
