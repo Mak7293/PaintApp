@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.soft918.paintapp.R;
+import com.soft918.paintapp.domain.component.PaintView;
 import com.soft918.paintapp.domain.event.Event;
 import com.soft918.paintapp.domain.model.ColorSet;
 import com.soft918.paintapp.domain.util.PencilEraserSize;
@@ -29,6 +30,7 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<String> selectPencilEraser = new MutableLiveData<String>(PencilEraser.pencil.state);
     public MutableLiveData<String> pencilSize = new MutableLiveData<String>(PencilEraserSize.largeSize.size);
     public MutableLiveData<String> eraserSize = new MutableLiveData<String>(PencilEraserSize.largeSize.size);
+    public ArrayList<PaintView.CustomPath> pathList = new ArrayList<>();
     @Inject
     public MainViewModel(Application application){
         this.application = application;

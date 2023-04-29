@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 public class PaintView extends View {
-    Context context;
 
     public PaintView(Context context, AttributeSet attrs){
         super(context,attrs);
@@ -25,7 +24,7 @@ public class PaintView extends View {
         setUpDrawing();
 
     }
-
+    private Context context;
     private CustomPath mDrawPath;
     private Bitmap mCanvasBitmap;
     private Paint mDrawPaint;
@@ -46,6 +45,12 @@ public class PaintView extends View {
         mCanvasPaint = new Paint(Paint.DITHER_FLAG);
         mBrushSize = 20f;  //no need anymore because setSizeToBrush fun
     }
+    public void setPath(ArrayList<CustomPath> list){
+        mPath.addAll(list);
+    }
+    public ArrayList<CustomPath> getPath(){
+        return mPath;
+    }
 
     public void onClickUndo(){
         if(mPath.size() > 0){
@@ -63,8 +68,8 @@ public class PaintView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawBitmap(mCanvasBitmap,0f,0f,mCanvasPaint);
 
+        canvas.drawBitmap(mCanvasBitmap,0f,0f,mCanvasPaint);
         for(int path = 0; path <= mPath.size()-1 ; path++){
             mDrawPaint.setStrokeWidth(mPath.get(path).brushThickness);
             mDrawPaint.setColor(mPath.get(path).color);
@@ -88,20 +93,11 @@ public class PaintView extends View {
                 mDrawPath.color = color;
                 mDrawPath.brushThickness = mBrushSize;
                 mDrawPath.reset();
-                /*if (touchX != null) {
-                    if (touchY != null) {
-                        mDrawPath!!.moveTo(touchX,touchY);
-                    }
-                }*/
                 mDrawPath.moveTo(touchX,touchY);
                 break;
             }
             case MotionEvent.ACTION_MOVE : {
-                /*if (touchX != null) {
-                    if (touchY != null) {
-                        mDrawPath!!.lineTo(touchX,touchY)
-                    }
-                }*/
+
                 mDrawPath.lineTo(touchX,touchY);
                 break;
             }
@@ -127,7 +123,7 @@ public class PaintView extends View {
         mDrawPaint.setColor(newColor);  //  BoilerPlate code?
     }
 
-    static class CustomPath extends Path {
+    public static class CustomPath extends Path {
         int color;
         float brushThickness;
         public CustomPath(int color, float brushThickness){

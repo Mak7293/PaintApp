@@ -9,12 +9,23 @@
         android:id="@+id/paintFragment"
         android:name="com.soft918.paintapp.presentation.ui.PaintFragment"
         android:label="fragment_paint"
-        tools:layout="@layout/fragment_paint" />
+        tools:layout="@layout/fragment_paint" >
+        <action
+            android:id="@+id/action_paintFragment_to_drawingsDrawnFragment"
+            app:destination="@id/drawingsDrawnFragment" />
+        <action
+            android:id="@+id/action_paintFragment_to_sampleDesignFragment"
+            app:destination="@id/sampleDesignFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreen"
         android:name="com.soft918.paintapp.presentation.ui.SplashScreen"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" />
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_paintFragment"
+            app:destination="@id/paintFragment" />
+    </fragment>
     <fragment
         android:id="@+id/drawingsDrawnFragment"
         android:name="com.soft918.paintapp.presentation.ui.DrawingsDrawnFragment"

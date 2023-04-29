@@ -12,24 +12,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/fl_paint"
         />
-
     <FrameLayout
         android:id="@+id/fl_paint"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/rv_pencil"
-        app:layout_constraintBottom_toTopOf="@id/fl_tools"
+        app:layout_constraintBottom_toTopOf="@id/ll_tools"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <com.soft918.paintapp.domain.component.PaintView
             android:id="@+id/paint_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
     </FrameLayout>
     <LinearLayout
-        android:id="@+id/fl_tools"
+        android:id="@+id/ll_tools"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:orientation="horizontal"
@@ -127,9 +125,14 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/add_remove_btn_background"
             android:src="@drawable/ic_undo"/>
-
-
-
     </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/ll_tools"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_add"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

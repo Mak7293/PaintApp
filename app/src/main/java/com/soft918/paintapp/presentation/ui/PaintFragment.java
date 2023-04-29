@@ -9,12 +9,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentPaintBinding;
 import com.soft918.paintapp.domain.adapters.PencilAdapter;
@@ -23,12 +22,12 @@ import com.soft918.paintapp.domain.model.ColorSet;
 import com.soft918.paintapp.domain.util.PencilEraserSize;
 import com.soft918.paintapp.domain.util.PencilEraser;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import dagger.hilt.android.AndroidEntryPoint;
+
+
 
 @AndroidEntryPoint
 public class PaintFragment extends Fragment {
@@ -59,6 +58,7 @@ public class PaintFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         subscribeToLiveData();
+        
         binding.pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +113,27 @@ public class PaintFragment extends Fragment {
                 ));
             }
         });
+        binding.fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showBottomSheet();
+                viewModel.pathList = binding.paintView.getPath();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupRecyclerView();
+        if (!viewModel.pathList.isEmpty()){
+            binding.paintView.setPath(viewModel.pathList);
+        }
+    }
+
+    private void showBottomSheet(){
+        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(this);
+        modalBottomSheet.show(getActivity().getSupportFragmentManager(), MaterialBottomSheet.TAG);
     }
     private void subscribeToLiveData(){
         viewModel.colorList.observe(getViewLifecycleOwner(),new Observer<List<ColorSet>>(){
@@ -241,6 +262,7 @@ public class PaintFragment extends Fragment {
             @Override
             public void onClickSelect(int id) {
                 viewModel.onEvent(new Event.UpdateColorList(id));
+                selectPencilOrEraser(PencilEraser.pencil.state);
             }
         });
     }
