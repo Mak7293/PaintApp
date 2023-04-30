@@ -2,7 +2,10 @@ package com.soft918.paintapp.presentation.viewmodel;
 
 
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -14,8 +17,14 @@ import com.soft918.paintapp.domain.model.ColorSet;
 import com.soft918.paintapp.domain.util.PencilEraserSize;
 import com.soft918.paintapp.domain.util.PencilEraser;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.inject.Inject;
 
@@ -31,12 +40,13 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<String> pencilSize = new MutableLiveData<String>(PencilEraserSize.largeSize.size);
     public MutableLiveData<String> eraserSize = new MutableLiveData<String>(PencilEraserSize.largeSize.size);
     public ArrayList<PaintView.CustomPath> pathList = new ArrayList<>();
+    public int sampleImage = 0;
+    private final ScheduledExecutorService backgroundExecutor = Executors.newSingleThreadScheduledExecutor();
     @Inject
     public MainViewModel(Application application){
         this.application = application;
         colorList.postValue(provideListOfColorSet());
     }
-
     public void onEvent(Event event){
         if (event instanceof Event.UpdateColorList){
             updateColorList(((Event.UpdateColorList) event).listId);
@@ -47,7 +57,48 @@ public class MainViewModel extends ViewModel {
                     ((Event.changeSize) event).size,
                     ((Event.changeSize) event).state
             );
+        } else if(event instanceof Event.saveBitmapInDeviceStorage){
+            saveBitmapInDeviceStorage(
+                    ((Event.saveBitmapInDeviceStorage) event).bitmap
+            );
         }
+    }
+    private void saveBitmapInDeviceStorage(Bitmap bitmap){
+        final String[] result = new String[1];
+        Executor mainExecutor = ContextCompat.getMainExecutor(application);
+        backgroundExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                if(bitmap != null){
+                    try{
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG,90,bytes);
+                        File file = new File(application.getExternalCacheDir().getAbsoluteFile().toString() +
+                                File.separator + "Paint" + System.currentTimeMillis()/1000 +
+                                ".png" );
+                        FileOutputStream fo = new FileOutputStream(file);
+                        fo.write(bytes.toByteArray());
+                        fo.close();
+                        result[0] = file.getAbsolutePath();
+                        mainExecutor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!result[0].isEmpty()){
+                                    Toast.makeText(application,"فایل نقاشی با موفقیت ذخیره شد:" + result[0],
+                                            Toast.LENGTH_SHORT ).show();
+                                }else{
+                                    Toast.makeText(application,"خطا در ذخیره فایل، لطفا دوباره اقدام به ذخیره فایل نمایید.",
+                                            Toast.LENGTH_SHORT ).show();
+                                }
+                            }
+                        });
+                    }catch(Exception e){
+                        result[0] = "";
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
     private void updatePencilEraserSize(String size, String state){
         if (size != null){
@@ -101,5 +152,9 @@ public class MainViewModel extends ViewModel {
         list.add(new ColorSet(ContextCompat.getColor(application,R.color.white),false));
         return list;
     }
-
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        backgroundExecutor.shutdown();
+    }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.soft918.paintapp.databinding.ActivityMainBinding;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        Log.d("onresume_main",String.valueOf(viewModel));
+
 
     }
 }

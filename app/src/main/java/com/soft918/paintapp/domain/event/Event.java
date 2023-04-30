@@ -1,5 +1,7 @@
 package com.soft918.paintapp.domain.event;
 
+import android.graphics.Bitmap;
+
 public class Event {
     static public class UpdateColorList extends Event{
         public int listId;
@@ -19,6 +21,12 @@ public class Event {
         public changeSize(String size,String state){
             this.size = size;
             this.state = state;
+        }
+    }
+    static public class saveBitmapInDeviceStorage extends Event{
+        public Bitmap bitmap;
+        public saveBitmapInDeviceStorage(Bitmap bitmap){
+            this.bitmap = bitmap;
         }
     }
 }

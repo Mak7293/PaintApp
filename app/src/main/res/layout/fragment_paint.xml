@@ -21,6 +21,11 @@
         app:layout_constraintBottom_toTopOf="@id/ll_tools"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+        <ImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
         <com.soft918.paintapp.domain.component.PaintView
             android:id="@+id/paint_view"
             android:layout_width="match_parent"

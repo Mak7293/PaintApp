@@ -52,6 +52,16 @@
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:backgroundTint="@color/num2_pallet_three"
             android:text="ذخیره کردن نقاشی در حافطه داخلی"/>
+        <Button
+            android:id="@+id/btn_delete_picture"
+            app:layout_constraintTop_toBottomOf="@+id/btn_save_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_text_color"
+            android:textSize="18sp"
+            android:fontFamily="@font/vazirmatn_semi_bold"
+            android:backgroundTint="@color/num2_pallet_three"
+            android:text="پاک کردن تصویر از پس زمینه نقاشی"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

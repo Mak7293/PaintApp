@@ -1,6 +1,9 @@
 package com.soft918.paintapp.presentation.ui;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +54,7 @@ public class PaintFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentPaintBinding.inflate(getLayoutInflater());
 
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         return binding.getRoot();
     }
@@ -58,7 +63,7 @@ public class PaintFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         subscribeToLiveData();
-        
+
         binding.pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,10 +134,15 @@ public class PaintFragment extends Fragment {
         if (!viewModel.pathList.isEmpty()){
             binding.paintView.setPath(viewModel.pathList);
         }
-    }
+        if(viewModel.sampleImage != 0){
+            binding.ivBackground.setImageDrawable(ContextCompat.getDrawable(requireContext(),viewModel.sampleImage));
+        }else{
+            binding.ivBackground.setImageDrawable(null);
+        }
 
+    }
     private void showBottomSheet(){
-        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(this);
+        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(this,viewModel,binding);
         modalBottomSheet.show(getActivity().getSupportFragmentManager(), MaterialBottomSheet.TAG);
     }
     private void subscribeToLiveData(){

@@ -6,23 +6,37 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentSampleDesignBinding;
+import com.soft918.paintapp.domain.adapters.PencilAdapter;
+import com.soft918.paintapp.domain.adapters.SampleDrawingAdapter;
+import com.soft918.paintapp.domain.event.Event;
+import com.soft918.paintapp.domain.util.PencilEraser;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class SampleDesignFragment extends Fragment {
 
+    @Inject
     public SampleDesignFragment() {
         // Required empty public constructor
     }
@@ -36,7 +50,7 @@ public class SampleDesignFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSampleDesignBinding.inflate(getLayoutInflater());
 
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         return binding.getRoot();
     }
@@ -46,6 +60,7 @@ public class SampleDesignFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setupToolbar();
+        setupRecyclerView();
     }
     private void setupToolbar(){
         ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.toolbar);
@@ -59,5 +74,49 @@ public class SampleDesignFragment extends Fragment {
                 }
             });
         }
+    }
+    private void setupRecyclerView(){
+        List<Integer> list = provideRecyclerViewList();
+        SampleDrawingAdapter adapter = new SampleDrawingAdapter(requireContext(),list);
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(requireContext(),2));
+        binding.recyclerView.setAdapter(adapter);
+        adapter.onClickListenerSelect(new SampleDrawingAdapter.OnClickListenerSelect() {
+            @Override
+            public void onClickSelect(int resId) {
+                viewModel.sampleImage = resId;
+                NavHostFragment.findNavController(SampleDesignFragment.this).popBackStack();
+            }
+        });
+
+    }
+    private List<Integer> provideRecyclerViewList(){
+        List<Integer> list = new ArrayList<>();
+        list.add(R.drawable.img_1);
+        list.add(R.drawable.img_2);
+        list.add(R.drawable.img_3);
+        list.add(R.drawable.img_4);
+        list.add(R.drawable.img_5);
+        list.add(R.drawable.img_6);
+        list.add(R.drawable.img_7);
+        list.add(R.drawable.img_8);
+        list.add(R.drawable.img_9);
+        list.add(R.drawable.img_10);
+        list.add(R.drawable.img_11);
+        list.add(R.drawable.img_12);
+        list.add(R.drawable.img_13);
+        list.add(R.drawable.img_14);
+        list.add(R.drawable.img_15);
+        list.add(R.drawable.img_16);
+        list.add(R.drawable.img_17);
+        list.add(R.drawable.img_18);
+        list.add(R.drawable.img_19);
+        list.add(R.drawable.img_20);
+        list.add(R.drawable.img_22);
+        list.add(R.drawable.img_23);
+        list.add(R.drawable.img_24);
+        list.add(R.drawable.img_25);
+        list.add(R.drawable.img_26);
+        list.add(R.drawable.img_27);
+        return list;
     }
 }
