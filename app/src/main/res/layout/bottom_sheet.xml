@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black_text_color"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:backgroundTint="@color/num2_pallet_three"
             android:text="اضافه کردن تصاویر پیش فرض"/>
@@ -28,27 +28,27 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_add_default_picture"            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black_text_color"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:backgroundTint="@color/num2_pallet_three"
             android:text="اضافه کردن تصاویر حافظه گوشی"/>
         <Button
-            android:id="@+id/btn_add_picture"
+            android:id="@+id/btn_add_drawn_picture"
             app:layout_constraintTop_toBottomOf="@+id/btn_add_memory_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black_text_color"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:backgroundTint="@color/num2_pallet_three"
-            android:text="اضافه کردن نقاشی های کشیده شده"/>
+            android:text="حذف و منتشر کردن نقاشی های کشیده شده"/>
         <Button
             android:id="@+id/btn_save_picture"
-            app:layout_constraintTop_toBottomOf="@+id/btn_add_picture"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_drawn_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black_text_color"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:backgroundTint="@color/num2_pallet_three"
             android:text="ذخیره کردن نقاشی در حافطه داخلی"/>
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black_text_color"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:backgroundTint="@color/num2_pallet_three"
             android:text="پاک کردن تصویر از پس زمینه نقاشی"/>

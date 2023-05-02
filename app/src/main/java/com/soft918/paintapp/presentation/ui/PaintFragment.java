@@ -1,11 +1,16 @@
 package com.soft918.paintapp.presentation.ui;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -19,6 +24,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.RequestManager;
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentPaintBinding;
 import com.soft918.paintapp.domain.adapters.PencilAdapter;
@@ -29,7 +36,11 @@ import com.soft918.paintapp.domain.util.PencilEraser;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
+import javax.inject.Inject;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 
@@ -48,6 +59,9 @@ public class PaintFragment extends Fragment {
     private int currentColor;
     private String pencilSize;
     private String eraserSize;
+
+    @Inject
+    RequestManager glide;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -126,7 +140,6 @@ public class PaintFragment extends Fragment {
             }
         });
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -142,7 +155,7 @@ public class PaintFragment extends Fragment {
 
     }
     private void showBottomSheet(){
-        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(this,viewModel,binding);
+        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(this,viewModel,binding,glide);
         modalBottomSheet.show(getActivity().getSupportFragmentManager(), MaterialBottomSheet.TAG);
     }
     private void subscribeToLiveData(){

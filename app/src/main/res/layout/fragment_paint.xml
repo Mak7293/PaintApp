@@ -138,6 +138,6 @@
         app:layout_constraintBottom_toTopOf="@id/ll_tools"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_add"/>
+        android:src="@drawable/ic_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
