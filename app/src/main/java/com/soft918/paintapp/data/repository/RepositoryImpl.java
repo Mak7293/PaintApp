@@ -1,5 +1,7 @@
 package com.soft918.paintapp.data.repository;
 
+import androidx.lifecycle.LiveData;
+
 import com.soft918.paintapp.data.data_source.PaintUriDao;
 import com.soft918.paintapp.data.data_source.PaintUriDatabase;
 import com.soft918.paintapp.domain.model.PaintUriEntity;
@@ -28,7 +30,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public List<PaintUriEntity> getAllPaintUri() {
+    public LiveData<List<PaintUriEntity>> getAllPaintUri() {
         return paintUriDao.provideUriList();
     }
 }

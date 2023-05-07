@@ -3,12 +3,12 @@
     android:dither="true"
     android:shape="oval">
     <size
-        android:height="10dp"
-        android:width="10dp"
-        />
+        android:width="20dp"
+        android:height="20dp"/>
+    <solid
+        android:color="#27E7FF"/>
     <stroke
-        android:width="1dp"
-        android:color="@color/black"
-        />
+        android:color="@color/num2_pallet_two"
+        android:width="0.75dp"/>
 
 </shape>

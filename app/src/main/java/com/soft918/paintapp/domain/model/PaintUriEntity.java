@@ -8,12 +8,14 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "uri-table")
 public class PaintUriEntity {
 
-    public Uri uri;
+    public String contentUri;
+    public String fileUri;
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public PaintUriEntity(int id, Uri uri){
+    public PaintUriEntity(int id, String contentUri,String fileUri){
         this.id = id;
-        this.uri = uri;
+        this.contentUri = contentUri;
+        this.fileUri = fileUri;
     }
 }

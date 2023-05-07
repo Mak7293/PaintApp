@@ -28,6 +28,7 @@ import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -83,11 +84,13 @@ public class SampleDesignFragment extends Fragment {
         adapter.onClickListenerSelect(new SampleDrawingAdapter.OnClickListenerSelect() {
             @Override
             public void onClickSelect(int resId) {
+                if(!Objects.equals(viewModel.drawnImage, "")){
+                    viewModel.drawnImage = "";
+                }
                 viewModel.sampleImage = resId;
                 NavHostFragment.findNavController(SampleDesignFragment.this).popBackStack();
             }
         });
-
     }
     private List<Integer> provideRecyclerViewList(){
         List<Integer> list = new ArrayList<>();

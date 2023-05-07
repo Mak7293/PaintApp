@@ -1,30 +1,19 @@
 package com.soft918.paintapp.presentation.ui;
 
-import android.Manifest;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.bumptech.glide.RequestManager;
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentPaintBinding;
@@ -36,27 +25,22 @@ import com.soft918.paintapp.domain.util.PencilEraser;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-
 import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
-
-
 
 @AndroidEntryPoint
 public class PaintFragment extends Fragment {
 
-    public PaintFragment() {
-        // Required empty public constructor
+    @Inject
+    public PaintFragment(){
     }
     private FragmentPaintBinding binding;
     private MainViewModel viewModel;
     private  PencilAdapter adapter;
     private boolean firstTime = true;
     private List<ColorSet> colorSetList = new ArrayList<>();
-    private int currentColor;
+    private int currentColor = Color.BLACK;
     private String pencilSize;
     private String eraserSize;
 
@@ -139,6 +123,7 @@ public class PaintFragment extends Fragment {
                 viewModel.pathList = binding.paintView.getPath();
             }
         });
+
     }
     @Override
     public void onResume() {
@@ -149,13 +134,21 @@ public class PaintFragment extends Fragment {
         }
         if(viewModel.sampleImage != 0){
             binding.ivBackground.setImageDrawable(ContextCompat.getDrawable(requireContext(),viewModel.sampleImage));
-        }else{
+        }else if(!Objects.equals(viewModel.drawnImage, "")){
+            glide.load(Uri.parse(viewModel.drawnImage))
+                    .centerInside()
+                    .into(binding.ivBackground);
+        } else{
             binding.ivBackground.setImageDrawable(null);
         }
-
     }
     private void showBottomSheet(){
-        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(this,viewModel,binding,glide);
+        MaterialBottomSheet modalBottomSheet = new MaterialBottomSheet(
+                this,
+                viewModel,
+                binding,
+                glide
+        );
         modalBottomSheet.show(getActivity().getSupportFragmentManager(), MaterialBottomSheet.TAG);
     }
     private void subscribeToLiveData(){
@@ -222,38 +215,38 @@ public class PaintFragment extends Fragment {
     private void setPencilSize(String size){
         if (size == PencilEraserSize.smallSize.size){
             binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.small_pencil));
+                    .getDrawable(requireContext(),R.drawable.small_pencil_day));
             binding.paintView.setSizeForBrush(8f);
         }else if(size == PencilEraserSize.mediumSize.size){
             binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.medium_pencil));
+                    .getDrawable(requireContext(),R.drawable.medium_pencil_day));
             binding.paintView.setSizeForBrush(16f);
         }else if(size == PencilEraserSize.largeSize.size){
             binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.large_pencil));
+                    .getDrawable(requireContext(),R.drawable.large_pencil_day));
             binding.paintView.setSizeForBrush(24f);
         }else if(size == PencilEraserSize.extraLargeSize.size){
             binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.extra_large_pencil));
+                    .getDrawable(requireContext(),R.drawable.extra_large_pencil_day));
             binding.paintView.setSizeForBrush(32f);
         }
     }
     private void setEraserSize(String size){
         if (size == PencilEraserSize.smallSize.size){
             binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.small_eraser));
+                    .getDrawable(requireContext(),R.drawable.small_eraser_day));
             binding.paintView.setSizeForBrush(8f);
         }else if(size == PencilEraserSize.mediumSize.size){
             binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.medium_eraser));
+                    .getDrawable(requireContext(),R.drawable.medium_eraser_day));
             binding.paintView.setSizeForBrush(16f);
         }else if(size == PencilEraserSize.largeSize.size){
             binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.large_eraser));
+                    .getDrawable(requireContext(),R.drawable.large_eraser_day));
             binding.paintView.setSizeForBrush(24f);
         }else if(size == PencilEraserSize.extraLargeSize.size){
             binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.extra_large_eraser));
+                    .getDrawable(requireContext(),R.drawable.extra_large_eraser_day));
             binding.paintView.setSizeForBrush(32f);
         }
     }

@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import com.soft918.paintapp.R;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,8 +20,8 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,15 +29,17 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.bumptech.glide.RequestManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.BottomSheetBinding;
 import com.soft918.paintapp.databinding.FragmentPaintBinding;
 import com.soft918.paintapp.domain.event.Event;
+import com.soft918.paintapp.domain.util.Constants;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
+
+import java.util.Objects;
 
 
 public class MaterialBottomSheet extends BottomSheetDialogFragment {
@@ -46,15 +49,18 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
     private FragmentPaintBinding paintBinding;
     private RequestManager glide;
 
+
     public MaterialBottomSheet(
             Fragment fragment,
             MainViewModel viewModel,
             FragmentPaintBinding paintBinding,
-            RequestManager glide){
+            RequestManager glide
+    ){
         this.fragment = fragment;
         this.viewModel = viewModel;
         this.paintBinding = paintBinding;
         this.glide = glide;
+
     }
     private BottomSheetBinding binding;
     public static String TAG = "modalBottomSheet";
@@ -64,6 +70,9 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == RESULT_OK && result.getData() != null){
+                        if (!Objects.equals(viewModel.drawnImage, "")){
+                            viewModel.drawnImage = "";
+                        }
                         glide.load(result.getData().getData())
                                 .centerInside()
                                 .into(paintBinding.ivBackground);
@@ -96,6 +105,7 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setupRadioGroup();
         binding.btnAddDefaultPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,14 +143,32 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
         binding.btnDeletePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewModel.sampleImage != 0){
+                if (viewModel.sampleImage != 0 ){
                     viewModel.sampleImage = 0;
-                    paintBinding.ivBackground.setImageDrawable(null);
-                }else{
+                }
+                if(!Objects.equals(viewModel.drawnImage, "")){
+                    viewModel.drawnImage = "";
+                }
+                if(paintBinding.ivBackground.getDrawable() == null){
                     Toast.makeText(fragment.requireContext(),
                             "تصویری در پس زمینه نقاشی بارگذاری نشده است.",Toast.LENGTH_LONG).show();
                 }
+                paintBinding.ivBackground.setImageDrawable(null);
+
                 getDialog().dismiss();
+            }
+        });
+        binding.rgTheme.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                getDialog().dismiss();
+                if (checkedId == R.id.rbDay){
+                    viewModel.current_theme.postValue(Constants.THEME_DAY);
+                } else if (checkedId == R.id.rbNight) {
+                    viewModel.current_theme.postValue(Constants.THEME_NIGHT);
+                }else if (checkedId == R.id.rbDefault) {
+                    viewModel.current_theme.postValue(Constants.THEME_DEFAULT);
+                }
             }
         });
         getDialog().setCancelable(true);
@@ -177,5 +205,21 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
                     }
                 })
                 .show();
+    }
+    private void setupRadioGroup(){
+        switch (viewModel.current_theme.getValue()){
+            case Constants.THEME_DEFAULT: {
+                binding.rbDefault.setChecked(true);
+                break;
+            }
+            case Constants.THEME_DAY: {
+                binding.rbDay.setChecked(true);
+                break;
+            }
+            case Constants.THEME_NIGHT: {
+                binding.rbNight.setChecked(true);
+                break;
+            }
+        }
     }
 }

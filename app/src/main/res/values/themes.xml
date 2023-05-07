@@ -1,9 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PaintApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.PaintApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
+    <!-- __________________customTheme__________________ -->
     <style name="Theme.PaintApp" parent="Base.Theme.PaintApp" />
+    <style name="radio_button" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@drawable/drawable_unit_tab_selector_day</item>
+        <item name="android:textColor">@drawable/drawable_units_tab_color_selector_day</item>
+    </style>
+    <style name="paint_fragment_background_color" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@color/bottomBar_background</item>
+    </style>
+    <style name="text_color" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:textColor">@color/black_text_color</item>
+    </style>
+    <style name="resize_btn_background" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@drawable/resize_btn_background_day</item>
+        <item name="android:tint">@color/black_text_color</item>
+    </style>
+    <style name="pencil_size_drawable" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:src">@drawable/extra_large_pencil_day</item>
+    </style>
+    <style name="eraser_size_drawable" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:src">@drawable/extra_large_eraser_day</item>
+    </style>
+
 </resources>

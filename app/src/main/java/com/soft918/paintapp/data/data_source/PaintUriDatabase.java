@@ -11,7 +11,6 @@ import com.soft918.paintapp.domain.model.PaintUriEntity;
         version = 1,
         exportSchema = false
 )
-@TypeConverters(Converters.class)
 public abstract class PaintUriDatabase extends RoomDatabase {
 
     abstract public PaintUriDao paintUriDao();

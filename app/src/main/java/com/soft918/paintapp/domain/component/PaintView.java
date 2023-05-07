@@ -46,7 +46,7 @@ public class PaintView extends View {
         mBrushSize = 20f;  //no need anymore because setSizeToBrush fun
     }
     public void setPath(ArrayList<CustomPath> list){
-        mPath.addAll(list);
+        mPath = list;
     }
     public ArrayList<CustomPath> getPath(){
         return mPath;

@@ -2,6 +2,7 @@ package com.soft918.paintapp.data.data_source;
 
 import android.net.Uri;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -21,5 +22,5 @@ public interface PaintUriDao {
     public void deleteUriInDb(PaintUriEntity uri);
 
     @Query("SELECT * FROM `uri-table`")
-    public List<PaintUriEntity> provideUriList();
+    public LiveData<List<PaintUriEntity>> provideUriList();
 }

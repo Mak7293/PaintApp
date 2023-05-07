@@ -4,15 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.soft918.paintapp.databinding.RvSampleDrawingItemBinding;
 
-import com.soft918.paintapp.databinding.RvPencilItemBinding;
-import com.soft918.paintapp.databinding.SampleDrawingItemBinding;
-import com.soft918.paintapp.domain.component.Pencil;
-import com.soft918.paintapp.domain.model.ColorSet;
 
 import java.util.List;
 
@@ -26,8 +22,8 @@ public class SampleDrawingAdapter extends RecyclerView.Adapter<SampleDrawingAdap
         this.list = list;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        SampleDrawingItemBinding binding;
-        public ViewHolder(@NonNull SampleDrawingItemBinding binding) {
+        RvSampleDrawingItemBinding binding;
+        public ViewHolder(@NonNull RvSampleDrawingItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -44,7 +40,7 @@ public class SampleDrawingAdapter extends RecyclerView.Adapter<SampleDrawingAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        return new ViewHolder(SampleDrawingItemBinding.inflate(
+        return new ViewHolder(RvSampleDrawingItemBinding.inflate(
                 LayoutInflater.from(parent.getContext()), parent, false)
         );
     }

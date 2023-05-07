@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/paintFragment">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/paintFragment"
@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_paint" >
         <action
             android:id="@+id/action_paintFragment_to_drawingsDrawnFragment"
-            app:destination="@id/drawingsDrawnFragment" />
+            app:destination="@id/drawnDrawingsFragment" />
         <action
             android:id="@+id/action_paintFragment_to_sampleDesignFragment"
             app:destination="@id/sampleDesignFragment" />
@@ -27,8 +27,8 @@
             app:destination="@id/paintFragment" />
     </fragment>
     <fragment
-        android:id="@+id/drawingsDrawnFragment"
-        android:name="com.soft918.paintapp.presentation.ui.DrawingsDrawnFragment"
+        android:id="@+id/drawnDrawingsFragment"
+        android:name="com.soft918.paintapp.presentation.ui.DrawnDrawingsFragment"
         android:label="fragment_drawings_drawn"
         tools:layout="@layout/fragment_drawings_drawn" />
     <fragment
