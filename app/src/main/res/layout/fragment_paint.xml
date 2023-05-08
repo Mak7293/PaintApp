@@ -80,7 +80,7 @@
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            app:dividerColor="@color/black"
+            style="@style/bottom_sheet_divider_color"
             android:layout_marginVertical="5dp"/>
         <TextView
             android:id="@+id/eraser"
@@ -121,7 +121,7 @@
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            app:dividerColor="@color/black"
+            style="@style/bottom_sheet_divider_color"
             android:layout_marginVertical="5dp"/>
         <ImageButton
             android:id="@+id/btn_undo"
@@ -139,6 +139,8 @@
         app:layout_constraintBottom_toTopOf="@id/ll_tools"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
+        android:theme="@style/paint_fragment_fab_overlay"
+        app:tint="@null"
         android:src="@drawable/ic_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

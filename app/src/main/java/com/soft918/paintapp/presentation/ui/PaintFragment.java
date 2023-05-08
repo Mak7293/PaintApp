@@ -1,6 +1,7 @@
 package com.soft918.paintapp.presentation.ui;
 
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -138,7 +139,11 @@ public class PaintFragment extends Fragment {
             glide.load(Uri.parse(viewModel.drawnImage))
                     .centerInside()
                     .into(binding.ivBackground);
-        } else{
+        }else if (viewModel.importedImage != null){
+            glide.load(viewModel.importedImage)
+                    .centerInside()
+                    .into(binding.ivBackground);
+        }else{
             binding.ivBackground.setImageDrawable(null);
         }
     }
@@ -213,60 +218,127 @@ public class PaintFragment extends Fragment {
         return null;
     }
     private void setPencilSize(String size){
-        if (size == PencilEraserSize.smallSize.size){
-            binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.small_pencil_day));
-            binding.paintView.setSizeForBrush(8f);
-        }else if(size == PencilEraserSize.mediumSize.size){
-            binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.medium_pencil_day));
-            binding.paintView.setSizeForBrush(16f);
-        }else if(size == PencilEraserSize.largeSize.size){
-            binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.large_pencil_day));
-            binding.paintView.setSizeForBrush(24f);
-        }else if(size == PencilEraserSize.extraLargeSize.size){
-            binding.pencilSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.extra_large_pencil_day));
-            binding.paintView.setSizeForBrush(32f);
+        int currentNightMode = getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(currentNightMode == Configuration.UI_MODE_NIGHT_NO){
+            if (size == PencilEraserSize.smallSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.small_pencil_day));
+                binding.paintView.setSizeForBrush(8f);
+            }else if(size == PencilEraserSize.mediumSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.medium_pencil_day));
+                binding.paintView.setSizeForBrush(16f);
+            }else if(size == PencilEraserSize.largeSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.large_pencil_day));
+                binding.paintView.setSizeForBrush(24f);
+            }else if(size == PencilEraserSize.extraLargeSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.extra_large_pencil_day));
+                binding.paintView.setSizeForBrush(32f);
+            }
+        }else {
+            if (size == PencilEraserSize.smallSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.small_pencil_night));
+                binding.paintView.setSizeForBrush(8f);
+            }else if(size == PencilEraserSize.mediumSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.medium_pencil_night));
+                binding.paintView.setSizeForBrush(16f);
+            }else if(size == PencilEraserSize.largeSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.large_pencil_night));
+                binding.paintView.setSizeForBrush(24f);
+            }else if(size == PencilEraserSize.extraLargeSize.size){
+                binding.pencilSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(),R.drawable.extra_large_pencil_night));
+                binding.paintView.setSizeForBrush(32f);
+            }
         }
+
     }
     private void setEraserSize(String size){
-        if (size == PencilEraserSize.smallSize.size){
-            binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.small_eraser_day));
-            binding.paintView.setSizeForBrush(8f);
-        }else if(size == PencilEraserSize.mediumSize.size){
-            binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.medium_eraser_day));
-            binding.paintView.setSizeForBrush(16f);
-        }else if(size == PencilEraserSize.largeSize.size){
-            binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.large_eraser_day));
-            binding.paintView.setSizeForBrush(24f);
-        }else if(size == PencilEraserSize.extraLargeSize.size){
-            binding.eraserSize.setImageDrawable(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.extra_large_eraser_day));
-            binding.paintView.setSizeForBrush(32f);
+        int currentNightMode = getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            if (size == PencilEraserSize.smallSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.small_eraser_day));
+                binding.paintView.setSizeForBrush(8f);
+            } else if (size == PencilEraserSize.mediumSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.medium_eraser_day));
+                binding.paintView.setSizeForBrush(16f);
+            } else if (size == PencilEraserSize.largeSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.large_eraser_day));
+                binding.paintView.setSizeForBrush(24f);
+            } else if (size == PencilEraserSize.extraLargeSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.extra_large_eraser_day));
+                binding.paintView.setSizeForBrush(32f);
+            }
+        }else {
+            if (size == PencilEraserSize.smallSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.small_eraser_night));
+                binding.paintView.setSizeForBrush(8f);
+            } else if (size == PencilEraserSize.mediumSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.medium_eraser_night));
+                binding.paintView.setSizeForBrush(16f);
+            } else if (size == PencilEraserSize.largeSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.large_eraser_night));
+                binding.paintView.setSizeForBrush(24f);
+            } else if (size == PencilEraserSize.extraLargeSize.size) {
+                binding.eraserSize.setImageDrawable(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.extra_large_eraser_night));
+                binding.paintView.setSizeForBrush(32f);
+            }
         }
     }
     private void selectPencilOrEraser(String state){
-        if (Objects.equals(state, PencilEraser.pencil.state)){
-            binding.eraser.setBackground(null);
-            binding.pencil.setBackground(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.selected_pencil_eraser_background));
-            binding.eraser.setTextColor(ContextCompat.getColor(requireContext(),R.color.black_text_color));
-            binding.pencil.setTextColor(ContextCompat.getColor(requireContext(),R.color.white_text_color));
-            binding.paintView.setColor(currentColor);
-            setPencilSize(pencilSize);
-        } else if (Objects.equals(state, PencilEraser.eraser.state)) {
-            binding.pencil.setBackground(null);
-            binding.eraser.setBackground(ContextCompat
-                    .getDrawable(requireContext(),R.drawable.selected_pencil_eraser_background));
-            binding.pencil.setTextColor(ContextCompat.getColor(requireContext(),R.color.black_text_color));
-            binding.eraser.setTextColor(ContextCompat.getColor(requireContext(),R.color.white_text_color));
-            binding.paintView.setColor(Color.WHITE);
-            setEraserSize(eraserSize);
+        int currentNightMode = getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            if (Objects.equals(state, PencilEraser.pencil.state)) {
+                binding.eraser.setBackground(null);
+                binding.pencil.setBackground(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.selected_pencil_eraser_background_day));
+                binding.eraser.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_text_color));
+                binding.pencil.setTextColor(ContextCompat.getColor(requireContext(), R.color.white_text_color));
+                binding.paintView.setColor(currentColor);
+                setPencilSize(pencilSize);
+            } else if (Objects.equals(state, PencilEraser.eraser.state)) {
+                binding.pencil.setBackground(null);
+                binding.eraser.setBackground(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.selected_pencil_eraser_background_day));
+                binding.pencil.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_text_color));
+                binding.eraser.setTextColor(ContextCompat.getColor(requireContext(), R.color.white_text_color));
+                binding.paintView.setColor(Color.WHITE);
+                setEraserSize(eraserSize);
+            }
+        }else{
+            if (Objects.equals(state, PencilEraser.pencil.state)) {
+                binding.eraser.setBackground(null);
+                binding.pencil.setBackground(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.selected_pencil_eraser_background_night));
+                binding.eraser.setTextColor(ContextCompat.getColor(requireContext(), R.color.white_text_color));
+                binding.pencil.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_text_color));
+                binding.paintView.setColor(currentColor);
+                setPencilSize(pencilSize);
+            } else if (Objects.equals(state, PencilEraser.eraser.state)) {
+                binding.pencil.setBackground(null);
+                binding.eraser.setBackground(ContextCompat
+                        .getDrawable(requireContext(), R.drawable.selected_pencil_eraser_background_night));
+                binding.pencil.setTextColor(ContextCompat.getColor(requireContext(), R.color.white_text_color));
+                binding.eraser.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_text_color));
+                binding.paintView.setColor(Color.WHITE);
+                setEraserSize(eraserSize);
+            }
         }
     }
     private void setupRecyclerView(){

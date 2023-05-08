@@ -106,6 +106,9 @@ public class DrawnDrawingsFragment extends Fragment {
                 if (viewModel.sampleImage != 0){
                     viewModel.sampleImage = 0;
                 }
+                if (viewModel.importedImage!=null){
+                    viewModel.importedImage = null;
+                }
                 viewModel.drawnImage = paintUriEntity.contentUri;
                 NavHostFragment.findNavController(DrawnDrawingsFragment.this).popBackStack();
             }

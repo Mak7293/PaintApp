@@ -73,9 +73,10 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
                         if (!Objects.equals(viewModel.drawnImage, "")){
                             viewModel.drawnImage = "";
                         }
-                        glide.load(result.getData().getData())
-                                .centerInside()
-                                .into(paintBinding.ivBackground);
+                        if(viewModel.sampleImage!=0){
+                            viewModel.sampleImage = 0;
+                        }
+                        viewModel.importedImage = result.getData().getData();
                     }
                 }
             });

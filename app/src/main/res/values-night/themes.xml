@@ -3,6 +3,7 @@
     <style name="Base.Theme.PaintApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/num2_pallet_one</item>
     </style>
     <!-- __________________customTheme__________________ -->
     <style name="radio_button" parent="ThemeOverlay.MaterialComponents.Dark">
@@ -25,4 +26,25 @@
     <style name="eraser_size_drawable" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="android:src">@drawable/extra_large_eraser_night</item>
     </style>
+    <style name="bottom_sheet_divider_color" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="dividerColor">@color/white_text_color</item>
+    </style>
+    <style name="bottom_sheet_btn_background_color" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/bottom_sheet_btn_background_night</item>
+    </style>
+    <style name="paint_fragment_fab_overlay" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="android:backgroundTint">@color/num2_pallet_one</item>
+        <item name="android:tint">@color/white_text_color</item>
+    </style>
+    <style name="toolbar_general_background" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="android:background">@color/num2_pallet_one</item>
+        <item name="navigationIcon">@drawable/ic_custom_back_button_night</item>
+    </style>
+    <style name="bottom_sheet_background_color" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="android:background">@color/num2_pallet_one</item>
+    </style>
+    <style name="rv_sample_drawing_item" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="android:background">@drawable/sample_drawing_item_background_night</item>
+    </style>
+
 </resources>

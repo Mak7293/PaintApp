@@ -68,6 +68,7 @@ public class SampleDesignFragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if(actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+
             binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,6 +87,9 @@ public class SampleDesignFragment extends Fragment {
             public void onClickSelect(int resId) {
                 if(!Objects.equals(viewModel.drawnImage, "")){
                     viewModel.drawnImage = "";
+                }
+                if (viewModel.importedImage!=null){
+                    viewModel.importedImage = null;
                 }
                 viewModel.sampleImage = resId;
                 NavHostFragment.findNavController(SampleDesignFragment.this).popBackStack();

@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:background="@color/num1_pallet_three"
+        android:theme="@style/toolbar_general_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -19,7 +19,7 @@
             android:textSize="18sp"
             android:layoutDirection="rtl"
             android:layout_marginRight="10dp"
-            android:textColor="@color/black_text_color"
+            android:theme="@style/text_color"
             android:text="الگو های نقاشی"/>
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView

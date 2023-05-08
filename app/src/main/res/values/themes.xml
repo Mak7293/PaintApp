@@ -3,6 +3,7 @@
     <style name="Base.Theme.PaintApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/bottomBar_background</item>
     </style>
     <!-- __________________customTheme__________________ -->
     <style name="Theme.PaintApp" parent="Base.Theme.PaintApp" />
@@ -26,5 +27,26 @@
     <style name="eraser_size_drawable" parent="ThemeOverlay.MaterialComponents.Light">
         <item name="android:src">@drawable/extra_large_eraser_day</item>
     </style>
+    <style name="bottom_sheet_divider_color" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="dividerColor">@color/black_text_color</item>
+    </style>
+    <style name="bottom_sheet_btn_background_color" parent="android:Widget.Button">
+        <item name="android:background">@drawable/bottom_sheet_btn_background_day</item>
+    </style>
+    <style name="paint_fragment_fab_overlay" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:backgroundTint">@color/bottomBar_background</item>
+        <item name="android:tint">@color/black_text_color</item>
+    </style>
+    <style name="toolbar_general_background" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@color/bottomBar_background</item>
+        <item name="navigationIcon">@drawable/ic_custom_back_button_day</item>
+    </style>
+    <style name="bottom_sheet_background_color" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="rv_sample_drawing_item" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:background">@drawable/sample_drawing_item_background_day</item>
+    </style>
+
 
 </resources>

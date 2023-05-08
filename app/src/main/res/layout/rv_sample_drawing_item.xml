@@ -9,7 +9,7 @@
         android:layout_gravity="center">
         <ImageView
             android:id="@+id/image_view"
-            android:background="@drawable/sample_drawing_item_background"
+            android:theme="@style/rv_sample_drawing_item"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

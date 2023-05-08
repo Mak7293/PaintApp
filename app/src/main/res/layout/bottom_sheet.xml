@@ -9,19 +9,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="20dp"
         android:layout_gravity="top"
         android:id="@+id/child"
+        android:theme="@style/bottom_sheet_background_color"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:behavior_peekHeight="325dp">
+        app:behavior_peekHeight="335dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="تغییر تم اپلیکیشن:"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:padding="3dp"
-            android:textColor="@color/black"
+            android:theme="@style/text_color"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:textSize="16sp"
             />
@@ -29,6 +32,7 @@
             android:id="@+id/rg_theme"
             android:layout_width="200dp"
             android:layout_height="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="10dp"
             android:padding="3dp"
             android:gravity="center"
@@ -45,7 +49,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:text="پیشفرض"
+                android:text="پیش فرض"
                 android:textSize="14sp"
                 android:fontFamily="@font/vazirmatn_regular"
                 android:textStyle="bold"/>
@@ -82,58 +86,63 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:dividerThickness="1.5dp"
-            app:dividerColor="@color/black"
+            style="@style/bottom_sheet_divider_color"
             app:layout_constraintTop_toBottomOf="@+id/rg_theme"
             />
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_default_picture"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:textColor="@color/black_text_color"
             android:textSize="16sp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/num2_pallet_three"
+            style="@style/bottom_sheet_btn_background_color"
             android:text="اضافه کردن تصاویر پیش فرض"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_memory_picture"
-            app:layout_constraintTop_toBottomOf="@+id/btn_add_default_picture"            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_default_picture"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:textColor="@color/black_text_color"
             android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/vazirmatn_semi_bold"
-            android:backgroundTint="@color/num2_pallet_three"
+            style="@style/bottom_sheet_btn_background_color"
             android:text="اضافه کردن تصاویر حافظه گوشی"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_drawn_picture"
             app:layout_constraintTop_toBottomOf="@+id/btn_add_memory_picture"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:textColor="@color/black_text_color"
             android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/vazirmatn_semi_bold"
-            android:backgroundTint="@color/num2_pallet_three"
+            style="@style/bottom_sheet_btn_background_color"
             android:text="حذف و به اشتراک گذاری نقاشی های کشیده شده"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_save_picture"
             app:layout_constraintTop_toBottomOf="@+id/btn_add_drawn_picture"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:textColor="@color/black_text_color"
             android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/vazirmatn_semi_bold"
-            android:backgroundTint="@color/num2_pallet_three"
+            style="@style/bottom_sheet_btn_background_color"
             android:text="ذخیره کردن نقاشی در حافطه داخلی"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_delete_picture"
             app:layout_constraintTop_toBottomOf="@+id/btn_save_picture"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:textColor="@color/black_text_color"
             android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/vazirmatn_semi_bold"
-            android:backgroundTint="@color/num2_pallet_three"
+            style="@style/bottom_sheet_btn_background_color"
             android:text="پاک کردن تصویر از پس زمینه نقاشی"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

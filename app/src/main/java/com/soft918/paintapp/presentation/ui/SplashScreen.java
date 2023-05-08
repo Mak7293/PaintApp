@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
@@ -64,13 +65,15 @@ public class SplashScreen extends Fragment {
                                 .Builder()
                                 .setPopUpTo(R.id.splashScreen, true)
                                 .build();
-                        NavHostFragment
-                                .findNavController(SplashScreen.this)
-                                .navigate(
-                                        R.id.action_splashScreen_to_paintFragment,
-                                        savedInstanceState,
-                                        navOptions
-                                );
+                        if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)){
+                            NavHostFragment
+                                    .findNavController(SplashScreen.this)
+                                    .navigate(
+                                            R.id.action_splashScreen_to_paintFragment,
+                                            savedInstanceState,
+                                            navOptions
+                                    );
+                        }
                     }
                 },
                 2500);

@@ -48,6 +48,7 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<String> current_theme = new MutableLiveData<>("");
     public int sampleImage = 0;
     public String drawnImage = "";
+    public Uri importedImage;
     private SharedPreferences sharedPref;;
     private final ScheduledExecutorService backgroundExecutor = Executors.newSingleThreadScheduledExecutor();
 
