@@ -131,7 +131,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/vazirmatn_semi_bold"
             style="@style/bottom_sheet_btn_background_color"
-            android:text="ذخیره کردن نقاشی در حافطه داخلی"/>
+            android:text="ذخیره کردن نقاشی در حافظه داخلی"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_delete_picture"
             app:layout_constraintTop_toBottomOf="@+id/btn_save_picture"

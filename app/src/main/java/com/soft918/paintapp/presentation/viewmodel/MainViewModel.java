@@ -90,15 +90,19 @@ public class MainViewModel extends ViewModel {
         }
     }
     private void savePaintPathToDb(File file){
+        Executor mainExecutor = ContextCompat.getMainExecutor(application);
         Uri uri = FileProvider.getUriForFile(application,
                 application.getApplicationContext().getPackageName() + ".fileprovider", file);
         try{
             repository.insertPaintUri(new PaintUriEntity(0, uri.toString(),file.getAbsolutePath()));
-            Toast.makeText(application,
-                    "نقاشی با موفقیت ذخیره شد.",Toast.LENGTH_LONG).show();
         }catch (SQLiteException e){
-            Toast.makeText(application,
-                    "خطا در ذخیره نقاشی، لطفا دوبار تلاش کنید.",Toast.LENGTH_LONG).show();
+            mainExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(application,
+                            "خطا در ذخیره نقاشی، لطفا دوبار تلاش کنید.",Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
     private void deletePaintPathInDb(PaintUriEntity paintUriEntity){
@@ -108,25 +112,28 @@ public class MainViewModel extends ViewModel {
                 try{
                     repository.deletePaintUri(paintUriEntity);
                     deletePaintFile(paintUriEntity);
-                    Toast.makeText(application,
-                            "نقاشی با موفقیت حذف شد.",Toast.LENGTH_LONG).show();
                 }catch (SQLiteException e){
-                    Toast.makeText(application,
-                            "خطا در حذف نقاشی، لطفا دوبار تلاش کنید.",Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
             }
         });
     }
     private void deletePaintFile(PaintUriEntity paintUriEntity){
-        File file = new File(paintUriEntity.fileUri);
-        if (file.exists()){
-            boolean result = file.delete();
-            if (result){
-                Toast.makeText(application,"نقاشی با موفقیت حذف شد.",Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(application,"خطا در حذف نقاشی، لطفا دوباره تلاش کنید.",Toast.LENGTH_SHORT).show();
+        Executor mainExecutor = ContextCompat.getMainExecutor(application);
+        mainExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                File file = new File(paintUriEntity.fileUri);
+                if (file.exists()){
+                    boolean result = file.delete();
+                    if (result){
+                        Toast.makeText(application,"نقاشی با موفقیت حذف شد.",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(application,"خطا در حذف نقاشی، لطفا دوباره تلاش کنید.",Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
-        }
+        });
     }
 
     private void saveBitmapInDeviceStorage(Bitmap bitmap){

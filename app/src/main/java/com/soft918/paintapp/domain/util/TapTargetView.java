@@ -23,7 +23,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color),
                         TapTarget.forView(view.get(1), "انتخاب مداد",
@@ -32,7 +32,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color),
                         TapTarget.forView(view.get(2), "تغییر سایز مداد",
@@ -41,7 +41,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color),
                         TapTarget.forView(view.get(3), "انتخاب پاک کن",
@@ -50,7 +50,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color),
                         TapTarget.forView(view.get(4), "تغییر سایز پاک کن",
@@ -59,7 +59,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color),
                         TapTarget.forView(view.get(5), "بازگرداندن تغییرات",
@@ -68,7 +68,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color)
                 )
@@ -94,12 +94,12 @@ public class TapTargetView {
                 .targets(
                         TapTarget.forView(view, "انتخاب تصویر پس زمینه",
                                         " می توانید از تصاویر پیشفرض این قسمت به عنوان تصویر کمکی برای" +
-                                                " نقاشی استفاده کنید و در انتها این تصویر کمکی را پاک کنید.")
+                                                " نقاشی استفاده کنید.")
                                 .dimColor(android.R.color.white)
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color)
                 )
@@ -141,7 +141,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color),
                         TapTarget.forView(view.get(2), "به اشتراک گذاری نقاشی های کشیده شده",
@@ -150,7 +150,7 @@ public class TapTargetView {
                                 .outerCircleColor(R.color.num2_pallet_three)
                                 .targetCircleColor(R.color.num2_pallet_two)
                                 .transparentTarget(true)
-                                .targetRadius(45)
+                                .targetRadius(60)
                                 .titleTextColor(R.color.black_text_color)
                                 .descriptionTextColor(R.color.black_text_color)
                 )
