@@ -1,13 +1,16 @@
 package com.soft918.paintapp.domain.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnticipateOvershootInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import com.soft918.paintapp.databinding.RvPencilItemBinding;
 import com.soft918.paintapp.domain.component.Pencil;
@@ -52,10 +55,13 @@ public class PencilAdapter extends RecyclerView.Adapter<PencilAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int color = colorList.get(position).color;
         boolean isPicked = colorList.get(position).isPicked;
+
         if (isPicked){
+            setWidthAndHeightOfItem(holder,235);
             holder.binding.flRvPencil.removeAllViews();
             holder.binding.flRvPencil.addView(new Pencil(context, color,160f));
         }else {
+            setWidthAndHeightOfItem(holder,175);
             holder.binding.flRvPencil.removeAllViews();
             holder.binding.flRvPencil.addView(new Pencil(context, color,100f));
         }
@@ -71,6 +77,12 @@ public class PencilAdapter extends RecyclerView.Adapter<PencilAdapter.ViewHolder
     public int getItemCount() {
         return colorList.size();
     }
-
+    private void setWidthAndHeightOfItem(ViewHolder holder,int height){
+        ViewGroup.LayoutParams ivLayoutParams = holder.binding.flRvPencil.getLayoutParams();
+        ivLayoutParams.height = height;
+        ivLayoutParams.width = (int) (34*2+3);
+        holder.binding.flRvPencil.setLayoutParams(ivLayoutParams);
+        holder.binding.flRvPencil.requestLayout();
+    }
 
 }

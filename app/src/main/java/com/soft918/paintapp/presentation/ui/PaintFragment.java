@@ -62,7 +62,6 @@ public class PaintFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         subscribeToLiveData();
-
         binding.pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

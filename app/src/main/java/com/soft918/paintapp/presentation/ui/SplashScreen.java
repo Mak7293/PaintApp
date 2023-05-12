@@ -35,6 +35,7 @@ public class SplashScreen extends Fragment {
     public SplashScreen() {
         // Required empty public constructor
     }
+
     private FragmentSplashScreenBinding binding;
     private MainViewModel viewModel;
     private final ScheduledExecutorService backgroundExecutor = Executors.newSingleThreadScheduledExecutor();

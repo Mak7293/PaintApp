@@ -1,43 +1,40 @@
 package com.soft918.paintapp.presentation.ui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.room.util.FileUtil;
-
-import android.os.FileUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
+import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentDrawingsDrawnBinding;
 import com.soft918.paintapp.domain.adapters.DrawnDrawingAdapter;
-import com.soft918.paintapp.domain.adapters.SampleDrawingAdapter;
 import com.soft918.paintapp.domain.event.Event;
 import com.soft918.paintapp.domain.model.PaintUriEntity;
+import com.soft918.paintapp.domain.util.TapTargetView;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
-
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -49,15 +46,17 @@ public class DrawnDrawingsFragment extends Fragment {
     private FragmentDrawingsDrawnBinding binding;
     private MainViewModel viewModel;
     boolean firstTime = true;
+    private Menu menu;
+    private DrawnDrawingAdapter adapter;
     @Inject
     RequestManager glide;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDrawingsDrawnBinding.inflate(getLayoutInflater());
-
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
+        setHasOptionsMenu(true);
         return binding.getRoot();
     }
 
@@ -97,7 +96,7 @@ public class DrawnDrawingsFragment extends Fragment {
     }
 
     private void setupRecyclerView(List<PaintUriEntity> list){
-        DrawnDrawingAdapter adapter = new DrawnDrawingAdapter(requireContext(),list,glide);
+        adapter = new DrawnDrawingAdapter(requireContext(),list,glide);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(requireContext(),2));
         binding.recyclerView.setAdapter(adapter);
         adapter.onClickListenerSelect(new DrawnDrawingAdapter.OnClickListenerSelect() {
@@ -148,5 +147,40 @@ public class DrawnDrawingsFragment extends Fragment {
                 startActivity(Intent.createChooser(shareIntent,"share"));
             }
         });
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        requireActivity().getMenuInflater().inflate(R.menu.menu_information,menu);
+        this.menu = menu;
+    }
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        int currentNightMode = getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(currentNightMode == Configuration.UI_MODE_NIGHT_NO){
+            menu.getItem(0).getIcon().setTint(
+                    ContextCompat.getColor(requireContext(),R.color.num2_pallet_one));
+        }else{
+            menu.getItem(0).getIcon().setTint(
+                    ContextCompat.getColor(requireContext(),R.color.white_text_color));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.information) {
+            if (viewModel.getAllPaintPath.getValue().size()!=0){
+                List<View> viewList = new ArrayList<>();
+                viewList.add(adapter.btn_select_view);
+                viewList.add(adapter.btn_delete_view);
+                viewList.add(adapter.btn_share_view);
+                TapTargetView.DrawnDrawingFragmentTapTargetView(requireActivity(),viewList);
+            }else{
+                Toast.makeText(requireContext(),"ابتدا باید اقدام به ذخیره سازی نقاشی از منو اصلی نمایید.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

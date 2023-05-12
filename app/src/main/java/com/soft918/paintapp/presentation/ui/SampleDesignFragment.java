@@ -1,5 +1,6 @@
 package com.soft918.paintapp.presentation.ui;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,19 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.soft918.paintapp.R;
 import com.soft918.paintapp.databinding.FragmentSampleDesignBinding;
-import com.soft918.paintapp.domain.adapters.PencilAdapter;
 import com.soft918.paintapp.domain.adapters.SampleDrawingAdapter;
-import com.soft918.paintapp.domain.event.Event;
-import com.soft918.paintapp.domain.util.PencilEraser;
+import com.soft918.paintapp.domain.util.TapTargetView;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -44,8 +45,9 @@ public class SampleDesignFragment extends Fragment {
 
     private FragmentSampleDesignBinding binding;
     private MainViewModel viewModel;
+    private Menu menu;
 
-
+    private SampleDrawingAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class SampleDesignFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
+        setHasOptionsMenu(true);
         return binding.getRoot();
     }
 
@@ -79,7 +82,7 @@ public class SampleDesignFragment extends Fragment {
     }
     private void setupRecyclerView(){
         List<Integer> list = provideRecyclerViewList();
-        SampleDrawingAdapter adapter = new SampleDrawingAdapter(requireContext(),list);
+        adapter = new SampleDrawingAdapter(requireContext(),list);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(requireContext(),2));
         binding.recyclerView.setAdapter(adapter);
         adapter.onClickListenerSelect(new SampleDrawingAdapter.OnClickListenerSelect() {
@@ -96,6 +99,34 @@ public class SampleDesignFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        requireActivity().getMenuInflater().inflate(R.menu.menu_information,menu);
+        this.menu = menu;
+    }
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        int currentNightMode = getResources().getConfiguration()
+                .uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(currentNightMode == Configuration.UI_MODE_NIGHT_NO){
+            menu.getItem(0).getIcon().setTint(
+                    ContextCompat.getColor(requireContext(),R.color.num2_pallet_one));
+        }else{
+            menu.getItem(0).getIcon().setTint(
+                    ContextCompat.getColor(requireContext(),R.color.white_text_color));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.information) {
+            TapTargetView.SampleDesignFragmentTapTargetView(requireActivity(),adapter.designView);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private List<Integer> provideRecyclerViewList(){
         List<Integer> list = new ArrayList<>();
         list.add(R.drawable.img_1);

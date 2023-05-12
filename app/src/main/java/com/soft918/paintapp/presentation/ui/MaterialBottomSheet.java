@@ -35,10 +35,14 @@ import com.bumptech.glide.RequestManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.soft918.paintapp.databinding.BottomSheetBinding;
 import com.soft918.paintapp.databinding.FragmentPaintBinding;
+import com.soft918.paintapp.domain.adapters.PencilAdapter;
 import com.soft918.paintapp.domain.event.Event;
 import com.soft918.paintapp.domain.util.Constants;
+import com.soft918.paintapp.domain.util.TapTargetView;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -48,7 +52,6 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
     private MainViewModel viewModel;
     private FragmentPaintBinding paintBinding;
     private RequestManager glide;
-
 
     public MaterialBottomSheet(
             Fragment fragment,
@@ -170,6 +173,20 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
                 }else if (checkedId == R.id.rbDefault) {
                     viewModel.current_theme.postValue(Constants.THEME_DEFAULT);
                 }
+            }
+        });
+        binding.btnIntroductionPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+                List<View> viewList = new ArrayList<>();
+                viewList.add(paintBinding.rvPencil);
+                viewList.add(paintBinding.pencil);
+                viewList.add(paintBinding.llChangePencilSize);
+                viewList.add(paintBinding.eraser);
+                viewList.add(paintBinding.llChangeEraserSize);
+                viewList.add(paintBinding.btnUndo);
+                TapTargetView.PaintFragmentTapTargetView(fragment.requireActivity(),viewList);
             }
         });
         getDialog().setCancelable(true);

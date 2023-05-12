@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import com.soft918.paintapp.databinding.ActivityMainBinding;
 import com.soft918.paintapp.domain.util.Constants;
 import com.soft918.paintapp.domain.util.Theme;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
+
+import java.util.Locale;
+
 import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -26,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        subscribeToLiveData();
 
+        applyEnglishLanguage(Locale.ENGLISH);
+        subscribeToLiveData();
     }
     private void subscribeToLiveData(){
         viewModel.current_theme.observe(this, new Observer<String>() {
@@ -49,5 +55,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void applyEnglishLanguage(Locale locale){
+        Configuration config = this.getResources().getConfiguration();
+        Locale sysLocale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sysLocale = config.getLocales().get(0);
+        } else {
+            //Legacy
+            sysLocale = config.locale;
+        }
+        if (sysLocale.getLanguage() != locale.getLanguage()) {
+            Locale.setDefault(locale);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                config.setLocale(locale);
+            } else {
+                //Legacy
+                config.locale = locale;
+            }
+            getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
@@ -14,12 +15,12 @@ import com.soft918.paintapp.R;
 
 public class Pencil extends View {
 
-    Paint mainPaint;
-    Paint linePaint;
-    Paint pencilTipPaint;
-    int color;
-    float length;
-    Context context;
+    private Paint mainPaint;
+    private Paint linePaint;
+    private Paint pencilTipPaint;
+    private int color;
+    private float length;
+    private Context context;
 
     public Pencil(Context context, int color,float length){
         super(context);
@@ -30,7 +31,7 @@ public class Pencil extends View {
         mainPaint.setColor(this.color);
         linePaint = new Paint();
         linePaint.setColor(Color.BLACK);
-        linePaint.setStrokeWidth(pxFromDp(context,2f));
+        linePaint.setStrokeWidth(toDp_toPx(context,3f));
         linePaint.setStyle(Paint.Style.STROKE);
         pencilTipPaint = new Paint();
         pencilTipPaint.setColor(ContextCompat.getColor(context, R.color.pencil_tip));
@@ -42,33 +43,110 @@ public class Pencil extends View {
         super.onDraw(canvas);
         float centerWidth = (float)getWidth()/2;
 
-        RectF rect = new RectF(centerWidth-40f,0f,centerWidth+40f,length);
+        RectF rect = new RectF(
+                toDp_toPx(context, centerWidth-34f),
+                toDp_toPx(context, 0f),
+                toDp_toPx(context, centerWidth+34f),
+                toDp_toPx(context, length)
+        );
         canvas.drawRect(rect, mainPaint);
-        canvas.drawLine(centerWidth-40f,0f,centerWidth-40f,length,linePaint);
-        canvas.drawLine(centerWidth-20f,0f,centerWidth-20f,length,linePaint);
-        canvas.drawLine(centerWidth+40f,0f,centerWidth+40f,length,linePaint);
-        canvas.drawLine(centerWidth+20f,0f,centerWidth+20f,length,linePaint);
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth-34f),
+                toDp_toPx(context, 0f),
+                toDp_toPx(context, centerWidth-34f),
+                toDp_toPx(context, length),
+                linePaint
+        );
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth-17f),
+                toDp_toPx(context, 0f),
+                toDp_toPx(context, centerWidth-17f),
+                toDp_toPx(context, length),
+                linePaint
+        );
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth+34f),
+                toDp_toPx(context, 0f),
+                toDp_toPx(context, centerWidth+34f),
+                toDp_toPx(context, length),
+                linePaint
+        );
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth+17f),
+                toDp_toPx(context, 0f),
+                toDp_toPx(context, centerWidth+17f),
+                toDp_toPx(context, length),
+                linePaint
+        );
         Path pathTip = new Path();
-        pathTip.moveTo(centerWidth-43f,length);
-        pathTip.lineTo(centerWidth,length+90f);
-        pathTip.lineTo(centerWidth+43f,length);
+        pathTip.moveTo(
+                toDp_toPx(context, centerWidth-34f),
+                toDp_toPx(context, length)
+        );
+        pathTip.lineTo(
+                toDp_toPx(context, centerWidth),
+                toDp_toPx(context, length+75f)
+        );
+        pathTip.lineTo(
+                toDp_toPx(context, centerWidth+34f),
+                toDp_toPx(context, length)
+        );
         pathTip.close();
         canvas.drawPath(pathTip,pencilTipPaint);
 
         Path pathTipColor = new Path();
-        pathTipColor.moveTo(centerWidth+1,length+90f);
-        pathTipColor.lineTo(centerWidth-19,length+45f);
-        pathTipColor.lineTo(centerWidth+19,length+45f);
+        pathTipColor.moveTo(
+                toDp_toPx(context, centerWidth+1),
+                toDp_toPx(context, length+75f)
+        );
+        pathTipColor.lineTo(
+                toDp_toPx(context, centerWidth-16),
+                toDp_toPx(context, length+39f)
+        );
+        pathTipColor.lineTo(
+                toDp_toPx(context, centerWidth+16),
+                toDp_toPx(context, length+39f)
+        );
         pathTipColor.close();
         canvas.drawPath(pathTipColor,mainPaint);
 
-        canvas.drawLine(centerWidth+43f,length,centerWidth-43f,length,linePaint);
-        canvas.drawLine(centerWidth-41f,length,centerWidth+1,length+90f,linePaint);
-        canvas.drawLine(centerWidth+41f,length,centerWidth-1,length+90f,linePaint);
-
-        canvas.drawLine(centerWidth-19,length+45f,centerWidth+19,length+45f,linePaint);
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth+34f),
+                toDp_toPx(context, length),
+                toDp_toPx(context, centerWidth-34f),
+                toDp_toPx(context, length),
+                linePaint
+        );
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth-34f),
+                toDp_toPx(context, length),
+                toDp_toPx(context, centerWidth),
+                toDp_toPx(context, length+75f),
+                linePaint
+        );
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth+34f),
+                toDp_toPx(context, length),
+                toDp_toPx(context, centerWidth),
+                toDp_toPx(context, length+75f),
+                linePaint
+        );
+        canvas.drawLine(
+                toDp_toPx(context, centerWidth-16),
+                toDp_toPx(context, length+39f),
+                toDp_toPx(context, centerWidth+16),
+                toDp_toPx(context, length+39f),
+                linePaint
+        );
     }
-    public static float pxFromDp(final Context context, final float dp) {
-        return dp * context.getResources().getDisplayMetrics().density;
+    private static float toPx(final Context context, final float _float) {
+        return _float * context.getResources().getDisplayMetrics().density;
+    }
+    private static float toDp(final Context context, final float _float) {
+        return _float / context.getResources().getDisplayMetrics().density;
+    }
+    private static float toDp_toPx(final Context context, final float _float) {
+        float toDp = toDp(context,_float);
+        return toPx(context,toDp);
     }
 }

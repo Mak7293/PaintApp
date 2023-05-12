@@ -16,6 +16,7 @@ public class SampleDrawingAdapter extends RecyclerView.Adapter<SampleDrawingAdap
 
     private final Context context;
     private final List<Integer> list;
+    public View designView;
 
     public SampleDrawingAdapter(Context context, List<Integer> list){
         this.context = context;
@@ -49,6 +50,7 @@ public class SampleDrawingAdapter extends RecyclerView.Adapter<SampleDrawingAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int resId = list.get(position);
         holder.binding.imageView.setImageDrawable(ContextCompat.getDrawable(context,resId));
+        designView = holder.binding.imageView;
         holder.binding.imageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
