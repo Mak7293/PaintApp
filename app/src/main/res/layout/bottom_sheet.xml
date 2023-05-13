@@ -17,12 +17,14 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:behavior_peekHeight="385dp">
         <TextView
+            android:id="@+id/tv_app_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="تغییر تم اپلیکیشن:"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rg_theme"
             android:padding="3dp"
             android:theme="@style/text_color"
             android:fontFamily="@font/vazirmatn_semi_bold"
@@ -30,13 +32,15 @@
             />
         <RadioGroup
             android:id="@+id/rg_theme"
-            android:layout_width="240dp"
+            android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:padding="3dp"
             android:gravity="center"
+            android:layout_marginEnd="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_app_theme"
             android:background="@drawable/drawable_radio_group_tab_background"
             android:orientation="horizontal">
             <RadioButton
