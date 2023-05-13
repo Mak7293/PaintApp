@@ -63,7 +63,6 @@ public class MaterialBottomSheet extends BottomSheetDialogFragment {
         this.viewModel = viewModel;
         this.paintBinding = paintBinding;
         this.glide = glide;
-
     }
     private BottomSheetBinding binding;
     public static String TAG = "modalBottomSheet";

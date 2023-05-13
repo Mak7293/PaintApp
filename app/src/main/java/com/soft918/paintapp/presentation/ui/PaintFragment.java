@@ -1,6 +1,7 @@
 package com.soft918.paintapp.presentation.ui;
 
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
@@ -21,8 +22,10 @@ import com.soft918.paintapp.databinding.FragmentPaintBinding;
 import com.soft918.paintapp.domain.adapters.PencilAdapter;
 import com.soft918.paintapp.domain.event.Event;
 import com.soft918.paintapp.domain.model.ColorSet;
+import com.soft918.paintapp.domain.util.Constants;
 import com.soft918.paintapp.domain.util.PencilEraserSize;
 import com.soft918.paintapp.domain.util.PencilEraser;
+import com.soft918.paintapp.domain.util.TapTargetView;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class PaintFragment extends Fragment {
 
-    @Inject
+
     public PaintFragment(){
     }
     private FragmentPaintBinding binding;
@@ -44,7 +47,8 @@ public class PaintFragment extends Fragment {
     private int currentColor = Color.BLACK;
     private String pencilSize;
     private String eraserSize;
-
+    @Inject
+    SharedPreferences sharedPref;
     @Inject
     RequestManager glide;
 
@@ -62,6 +66,7 @@ public class PaintFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         subscribeToLiveData();
+        isFirstTimeLaunch();
         binding.pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +149,20 @@ public class PaintFragment extends Fragment {
                     .into(binding.ivBackground);
         }else{
             binding.ivBackground.setImageDrawable(null);
+        }
+    }
+    private void isFirstTimeLaunch(){
+        boolean isFirstTimeLaunch = sharedPref.getBoolean(Constants.FIRST_TIME_LAUNCH_KEY,true);
+        if(isFirstTimeLaunch){
+            List<View> viewList = new ArrayList<>();
+            viewList.add(binding.rvPencil);
+            viewList.add(binding.pencil);
+            viewList.add(binding.llChangePencilSize);
+            viewList.add(binding.eraser);
+            viewList.add(binding.llChangeEraserSize);
+            viewList.add(binding.btnUndo);
+            TapTargetView.PaintFragmentTapTargetView(requireActivity(),viewList);
+            sharedPref.edit().putBoolean(Constants.FIRST_TIME_LAUNCH_KEY,false).apply();
         }
     }
     private void showBottomSheet(){

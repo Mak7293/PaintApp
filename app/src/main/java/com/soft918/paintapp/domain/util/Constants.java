@@ -9,4 +9,6 @@ public class Constants {
     public static final String SHARED_PREFERENCES = "shared_preferences";
     public static final String THEME_PREFERENCES_KEY = "theme_preferences_key";
 
+    public static final String FIRST_TIME_LAUNCH_KEY = "first_time_launch_key";
+
 }

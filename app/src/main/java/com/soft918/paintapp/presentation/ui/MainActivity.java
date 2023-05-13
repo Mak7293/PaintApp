@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import com.soft918.paintapp.databinding.ActivityMainBinding;
 import com.soft918.paintapp.domain.util.Constants;
+import com.soft918.paintapp.domain.util.TapTargetView;
 import com.soft918.paintapp.domain.util.Theme;
 import com.soft918.paintapp.presentation.viewmodel.MainViewModel;
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void applyEnglishLanguage(Locale locale){
         Configuration config = this.getResources().getConfiguration();
         Locale sysLocale;
